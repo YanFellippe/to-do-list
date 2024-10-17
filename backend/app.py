@@ -29,3 +29,13 @@ def update_task(task_id: int, task: schemas.TaskUpdate, db: Session = Depends(ge
 @app.delete("/tasks/{task_id}")
 def delete_task(task_id: int, db: Session = Depends(get_db)):
     return crud.delete_task(db=db, task_id=task_id)
+
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
